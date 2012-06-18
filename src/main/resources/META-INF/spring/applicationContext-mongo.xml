@@ -9,8 +9,6 @@
 	http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository.xsd">
 
 	<mongo:repositories base-package="com.summit.notebook.repository">
-		<repo:exclude-filter type="assignable"
-			expression="com.summit.notebook.repository.AuthorRepository" />
 	</mongo:repositories>
 
 	<!-- To translate any MongoExceptions thrown in @Repository annotated classes -->

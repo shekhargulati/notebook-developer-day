@@ -2,11 +2,11 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:list id="pl_com_shekhar_um_domain_Author" items="${authors}" z="8+/WY5xYyEchG4VKU6PLP9ul3dw=">
-        <table:table data="${authors}" id="l_com_shekhar_um_domain_Author" path="/authors" z="39Msl03Y1QFf/wgUZXIi0WhB9NI=">
-            <table:column id="c_com_shekhar_um_domain_Author_email" property="email" z="91lTHzE4buMYxHn4/4gjBT+qrDI="/>
-            <table:column id="c_com_shekhar_um_domain_Author_password" property="password" z="+AGimWi7OgoN7hdIqTkWV7TSowo="/>
-            <table:column id="c_com_shekhar_um_domain_Author_fullName" property="fullName" z="Igvn+J469ICTvOxYTAF86Z0+Jvw="/>
+    <page:list id="pl_com_summit_notebook_domain_Author" items="${authors}" z="Bsx6HMqx3D6QNPdWOe7xZ5gmDbw=">
+        <table:table data="${authors}" id="l_com_summit_notebook_domain_Author" path="/authors" z="CjjCsv9Y29x5xDoRCjXjBfxGrlg=">
+            <table:column id="c_com_summit_notebook_domain_Author_email" property="email" z="VYQElxMRDtYPm9G0Gz690E5skMI="/>
+            <table:column id="c_com_summit_notebook_domain_Author_password" property="password" z="/CR9uM7yLjkRh3IFPzUA9IU7e2M="/>
+            <table:column id="c_com_summit_notebook_domain_Author_fullName" property="fullName" z="AcTwAHEX91/4po4kDSHs01VSmvk="/>
         </table:table>
     </page:list>
 </div>
