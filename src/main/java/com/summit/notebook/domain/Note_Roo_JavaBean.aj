@@ -3,7 +3,7 @@
 
 package com.summit.notebook.domain;
 
-import com.summit.notebook.domain.Note;
+import java.lang.String;
 import java.util.Date;
 
 privileged aspect Note_Roo_JavaBean {
@@ -32,11 +32,11 @@ privileged aspect Note_Roo_JavaBean {
         this.created = created;
     }
     
-    public String Note.getTags() {
+    public String[] Note.getTags() {
         return this.tags;
     }
     
-    public void Note.setTags(String tags) {
+    public void Note.setTags(String[] tags) {
         this.tags = tags;
     }
     

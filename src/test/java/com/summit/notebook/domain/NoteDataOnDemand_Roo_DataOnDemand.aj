@@ -46,7 +46,7 @@ privileged aspect NoteDataOnDemand_Roo_DataOnDemand {
     }
     
     public void NoteDataOnDemand.setTags(Note obj, int index) {
-        String tags = "tags_" + index;
+        String[] tags = { "Y", "N" };
         obj.setTags(tags);
     }
     

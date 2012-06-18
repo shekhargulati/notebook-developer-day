@@ -14,12 +14,15 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 privileged aspect NotebookIntegrationTest_Roo_IntegrationTest {
     
     declare @type: NotebookIntegrationTest: @RunWith(SpringJUnit4ClassRunner.class);
     
     declare @type: NotebookIntegrationTest: @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml");
+    
+    declare @type: NotebookIntegrationTest: @Transactional;
     
     @Autowired
     private NotebookDataOnDemand NotebookIntegrationTest.dod;

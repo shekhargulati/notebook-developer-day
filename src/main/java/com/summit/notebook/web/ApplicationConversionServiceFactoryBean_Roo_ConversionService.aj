@@ -27,7 +27,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Note, String> ApplicationConversionServiceFactoryBean.getNoteToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.summit.notebook.domain.Note, java.lang.String>() {
             public String convert(Note note) {
-                return new StringBuilder().append(note.getTitle()).append(" ").append(note.getText()).append(" ").append(note.getCreated()).append(" ").append(note.getTags()).toString();
+                return new StringBuilder().append(note.getTitle()).append(" ").append(note.getText()).append(" ").append(note.getCreated()).toString();
             }
         };
     }

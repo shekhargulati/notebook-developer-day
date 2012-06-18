@@ -3,14 +3,17 @@
 
 package com.summit.notebook.domain;
 
-import com.summit.notebook.domain.Note;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import java.lang.String;
 
 privileged aspect Note_Roo_ToString {
     
     public String Note.toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+        StringBuilder sb = new StringBuilder();
+        sb.append("Created: ").append(getCreated()).append(", ");
+        sb.append("Tags: ").append(java.util.Arrays.toString(getTags())).append(", ");
+        sb.append("Text: ").append(getText()).append(", ");
+        sb.append("Title: ").append(getTitle());
+        return sb.toString();
     }
     
 }

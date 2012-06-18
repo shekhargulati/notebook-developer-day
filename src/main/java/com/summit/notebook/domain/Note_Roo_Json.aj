@@ -6,6 +6,7 @@ package com.summit.notebook.domain;
 import com.summit.notebook.domain.Note;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import java.lang.String;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

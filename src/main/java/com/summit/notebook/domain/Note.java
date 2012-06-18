@@ -32,5 +32,5 @@ public class Note {
     private Date created = new Date();
 
     @NotNull
-    private String tags;
+    private String[] tags;
 }

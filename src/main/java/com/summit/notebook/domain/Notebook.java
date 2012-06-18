@@ -35,5 +35,5 @@ public class Notebook {
     private String author;
 
     @NotNull
-    private String tags;
+    private String[] tags;
 }

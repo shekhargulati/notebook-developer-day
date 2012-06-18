@@ -65,7 +65,7 @@ privileged aspect NotebookDataOnDemand_Roo_DataOnDemand {
     }
     
     public void NotebookDataOnDemand.setTags(Notebook obj, int index) {
-        String tags = "tags_" + index;
+        String[] tags = { "Y", "N" };
         obj.setTags(tags);
     }
     

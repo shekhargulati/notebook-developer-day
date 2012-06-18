@@ -40,11 +40,11 @@ privileged aspect Notebook_Roo_JavaBean {
         this.author = author;
     }
     
-    public String Notebook.getTags() {
+    public String[] Notebook.getTags() {
         return this.tags;
     }
     
-    public void Notebook.setTags(String tags) {
+    public void Notebook.setTags(String[] tags) {
         this.tags = tags;
     }
     
