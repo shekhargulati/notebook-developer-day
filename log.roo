@@ -1,5 +1,5 @@
 // Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-18 11:52:49
-project --topLevelPackage com.summit.notebook --projectName summit --java 6
+project --topLevelPackage com.summit.notebook --projectName notebook --java 6
 hint
 mongo setup --databaseName notebook --host localhost --port 27017
 entity mongo --class ~.domain.Notebook --testAutomatically 
