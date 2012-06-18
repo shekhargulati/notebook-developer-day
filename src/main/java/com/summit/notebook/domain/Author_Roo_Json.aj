@@ -3,29 +3,29 @@
 
 package com.summit.notebook.domain;
 
-import com.summit.notebook.domain.Note;
+import com.summit.notebook.domain.Author;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-privileged aspect Note_Roo_Json {
+privileged aspect Author_Roo_Json {
     
-    public String Note.toJson() {
+    public String Author.toJson() {
         return new JSONSerializer().exclude("*.class").serialize(this);
     }
     
-    public static Note Note.fromJsonToNote(String json) {
-        return new JSONDeserializer<Note>().use(null, Note.class).deserialize(json);
+    public static Author Author.fromJsonToAuthor(String json) {
+        return new JSONDeserializer<Author>().use(null, Author.class).deserialize(json);
     }
     
-    public static String Note.toJsonArray(Collection<Note> collection) {
+    public static String Author.toJsonArray(Collection<Author> collection) {
         return new JSONSerializer().exclude("*.class").serialize(collection);
     }
     
-    public static Collection<Note> Note.fromJsonArrayToNotes(String json) {
-        return new JSONDeserializer<List<Note>>().use(null, ArrayList.class).use("values", Note.class).deserialize(json);
+    public static Collection<Author> Author.fromJsonArrayToAuthors(String json) {
+        return new JSONDeserializer<List<Author>>().use(null, ArrayList.class).use("values", Author.class).deserialize(json);
     }
     
 }

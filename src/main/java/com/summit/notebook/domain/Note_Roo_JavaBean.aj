@@ -3,7 +3,7 @@
 
 package com.summit.notebook.domain;
 
-import java.lang.String;
+import com.summit.notebook.domain.Note;
 import java.util.Date;
 
 privileged aspect Note_Roo_JavaBean {

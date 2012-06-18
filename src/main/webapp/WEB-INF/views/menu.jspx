@@ -7,9 +7,15 @@
             <menu:item id="i_notebook_new" messageCode="global_menu_new" url="/notebooks?form" z="RMivPMGxlhJBVOC8upxfrnlN1h4="/>
             <menu:item id="i_notebook_list" messageCode="global_menu_list" url="/notebooks?page=1&amp;size=${empty param.size ? 10 : param.size}" z="mwIwfxNbtq2+rvWTEvb9lfbugqg="/>
         </menu:category>
+        
         <menu:category id="c_note" z="9h2hsuneSrocx9jL7zHkTKVuHy8=">
             <menu:item id="i_note_new" messageCode="global_menu_new" url="/notes?form" z="oYBQPPA8gC477hQQZwvFgzKbD6o="/>
             <menu:item id="i_note_list" messageCode="global_menu_list" url="/notes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="FTO+GmUarl6QwFawad+RFkRN43I="/>
+        </menu:category>
+        
+        <menu:category id="c_author" z="DETG4XqcVC9sb/BVL/ybUSG8lUM=">
+            <menu:item id="i_author_new" messageCode="global_menu_new" url="/authors?form" z="e6WikSiFx46UnQunBmCd54pmrYE="/>
+            <menu:item id="i_author_list" messageCode="global_menu_list" url="/authors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/71/+sYxLDw3jeyTZyEHzZ9CQQQ="/>
         </menu:category>
     </menu:menu>
 </div>

@@ -3,13 +3,13 @@
 
 package com.summit.notebook.domain;
 
-import com.summit.notebook.domain.Note;
+import com.summit.notebook.domain.Author;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect Note_Roo_ToString {
+privileged aspect Author_Roo_ToString {
     
-    public String Note.toString() {
+    public String Author.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     
