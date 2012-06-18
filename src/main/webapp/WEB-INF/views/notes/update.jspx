@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_summit_notebook_domain_Note" modelAttribute="note" path="/notes" versionField="none" z="bMNgLlmo9R3vSWmg6HXS/YNs7gI=">
+        <field:input field="title" id="c_com_summit_notebook_domain_Note_title" required="true" z="l+yN5SATRk0IF2iseSiR4T4XaqY="/>
+        <field:textarea field="text" id="c_com_summit_notebook_domain_Note_text" required="true" z="L0BDlAR/WvdLxb8q0IWmG3SpUXU="/>
+        <field:input field="tags" id="c_com_summit_notebook_domain_Note_tags" required="true" z="YdjqfHoXSv9OLBGtZfI8AHhCC+I="/>
+    </form:update>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_summit_notebook_domain_Notebook" items="${notebooks}" z="fMoDLkF3gWu3tzi3WKHMtBTnDBA=">
+        <table:table data="${notebooks}" id="l_com_summit_notebook_domain_Notebook" path="/notebooks" z="0AOMcJTYBzbuHyuqkIOfpbnzU40=">
+            <table:column id="c_com_summit_notebook_domain_Notebook_name" property="name" z="pU+fQAxEbnpnt46typwr7/p7Y/U="/>
+            <table:column id="c_com_summit_notebook_domain_Notebook_description" property="description" z="q4nlFWgUNu6h+KtMdiyRZyKLhEY="/>
+            <table:column date="true" dateTimePattern="${notebook_created_date_format}" id="c_com_summit_notebook_domain_Notebook_created" property="created" z="u4FMbQWl+y7EzYeHLwo7XXcXBd8="/>
+            <table:column id="c_com_summit_notebook_domain_Notebook_author" property="author" z="GLKXXm9HsgI2Rax+5Lka2pboV8s="/>
+            <table:column id="c_com_summit_notebook_domain_Notebook_tags" property="tags" z="d/aTk0lVFXN9XkHzxxhhWqw2Kjw="/>
+        </table:table>
+    </page:list>
+</div>

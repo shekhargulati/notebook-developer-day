@@ -1,0 +1,30 @@
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-18 11:52:49
+project --topLevelPackage com.summit.notebook --projectName summit --java 6
+hint
+mongo setup --databaseName notebook --host localhost --port 27017
+entity mongo --class ~.domain.Notebook --testAutomatically 
+field string --fieldName name --notNull 
+field string --fieldName description --notNull --sizeMax 4000
+field date --fieldName created --notNull --type java.util.Date
+entity mongo --class ~.domain.Note --testAutomatically 
+field string --fieldName title --notNull 
+field string --fieldName text --notNull --sizeMax 4000
+field date --fieldName created --type java.util.Date --notNull 
+field string --fieldName tags --notNull 
+focus --class ~.domain.Notebook
+field string --fieldName author --notNull 
+field string --fieldName tags --notNull 
+repository mongo --interface ~.repository.NotebookRepository --entity ~.domain.Notebook
+repository mongo --interface ~.repository.NoteRepository --entity ~.domain.Note
+service --interface ~.service.NotebookService --entity ~.domain.Notebook
+service --interface ~.service.NoteService --entity ~.domain.Note
+json all
+web mvc setup
+web mvc all --package ~.web
+web mvc json all --package ~.web
+q
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-18 12:02:46
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2012-06-18 12:03:24
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log opened at 2012-06-18 12:05:06
+q
+// Spring Roo 1.2.1.RELEASE [rev 6eae723] log closed at 2012-06-18 12:05:27
