@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_com_summit_notebook_domain_Note" object="${note}" path="/notes" z="+k6ZQtndNN8T+kApory7arDOY2w=">
+    <page:show id="ps_com_summit_notebook_domain_Note" object="${note}" path="/notebooks/${notebookId}/notes" z="+k6ZQtndNN8T+kApory7arDOY2w=">
         <field:display field="title" id="s_com_summit_notebook_domain_Note_title" object="${note}" z="NjsoRRcpeJHa+R9RIImnYY6CMFE="/>
         <field:display field="text" id="s_com_summit_notebook_domain_Note_text" object="${note}" z="6EZC09kOwHduw67fBYM2GAvoTvQ="/>
         <field:display field="tags" id="s_com_summit_notebook_domain_Note_tags" object="${note}" z="7Q/g8tq6ImoyYDgAxSli7X6zwAE="/>

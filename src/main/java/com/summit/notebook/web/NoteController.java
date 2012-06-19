@@ -48,7 +48,7 @@ public class NoteController {
         notebookService.updateNotebook(notebook);
         return "redirect:/notebooks/"
                 + notebookId
-                + "/"
+                + "/notes/"
                 + encodeUrlPathSegment(note.getId().toString(),
                         httpServletRequest);
     }

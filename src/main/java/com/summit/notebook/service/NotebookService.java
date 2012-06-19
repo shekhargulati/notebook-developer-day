@@ -36,4 +36,6 @@ public interface NotebookService {
 
     void removeNoteFromNotebook(BigInteger notebookId, String noteId);
 
+    public abstract List<Notebook> findAllNotebookForUser(String username);
+
 }

@@ -2,10 +2,10 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <form:create id="fc_com_summit_notebook_domain_Note" modelAttribute="note" path="/notes" render="${empty dependencies}" z="WIHOtC/X5faEEcOaan/Sb+TO6JM=">
+    <form:update id="fc_com_summit_notebook_domain_Note" modelAttribute="note" path="/notebooks/${itemId}/notes" versionField="none" render="${empty dependencies}" z="WIHOtC/X5faEEcOaan/Sb+TO6JM=">
         <field:input field="title" id="c_com_summit_notebook_domain_Note_title" required="true" z="l+yN5SATRk0IF2iseSiR4T4XaqY="/>
         <field:textarea field="text" id="c_com_summit_notebook_domain_Note_text" required="true" z="L0BDlAR/WvdLxb8q0IWmG3SpUXU="/>
         <field:input field="tags" id="c_com_summit_notebook_domain_Note_tags" required="true" z="YdjqfHoXSv9OLBGtZfI8AHhCC+I="/>
-    </form:create>
+    </form:update>
     <form:dependency dependencies="${dependencies}" id="d_com_summit_notebook_domain_Note" render="${not empty dependencies}" z="YOopzWMEMYXucSe2phMOpkLUXUU="/>
 </div>

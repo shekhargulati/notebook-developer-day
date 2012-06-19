@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
@@ -107,5 +108,15 @@ public class NotebookServiceImpl implements NotebookService {
         map.put("_id", noteId);
         Update update = new Update().pull("notes", map);
         mongoTemplate.updateFirst(query, update, Notebook.class);
+    }
+
+    @Override
+    public List<Notebook> findAllNotebookForUser(String username) {
+        Query query = Query.query(Criteria.where("author").is(username));
+        Field fields = query.fields();
+        fields.include("name");
+        fields.include("id");
+        List<Notebook> notebooks = mongoTemplate.find(query, Notebook.class);
+        return notebooks;
     }
 }

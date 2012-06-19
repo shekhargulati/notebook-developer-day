@@ -3,6 +3,7 @@
 	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu"
 	xmlns:sec="http://www.springframework.org/security/tags" 
 	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	id="menu"
 	version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
@@ -19,12 +20,11 @@
 					z="mwIwfxNbtq2+rvWTEvb9lfbugqg=" />
 			</menu:category>
 
-			<menu:category id="c_note" z="9h2hsuneSrocx9jL7zHkTKVuHy8=">
-				<menu:item id="i_note_new" messageCode="global_menu_new"
-					url="/notes?form" z="oYBQPPA8gC477hQQZwvFgzKbD6o=" />
-				<menu:item id="i_note_list" messageCode="global_menu_list"
-					url="/notes?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="FTO+GmUarl6QwFawad+RFkRN43I=" />
+			<menu:category id="c_note" z="9h2hsuneSrocx9jL7zHkTKVuHy8=" label="NOTES">
+				<c:forEach items="${notebooks}" var="notebook">
+					<menu:item id="${notebook.name}" label="${notebook.name}"
+					url="/notebooks/${notebook.id}/notes" z="user-managed" />
+				</c:forEach>
 			</menu:category>
 		</sec:authorize>
 
