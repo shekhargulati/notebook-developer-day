@@ -37,7 +37,6 @@ public class Notebook {
 	@DateTimeFormat(style = "M-")
 	private Date created = new Date();
 
-	@NotNull
 	private String author;
 
 	@NotNull
