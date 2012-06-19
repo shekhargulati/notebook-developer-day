@@ -35,7 +35,6 @@ public class AuthorController {
 		}
 		uiModel.asMap().clear();
 		authorRepository.persist(author);
-		System.out.println(author);
 		return "redirect:/authors/"
 				+ encodeUrlPathSegment(author.getId().toString(),
 						httpServletRequest);

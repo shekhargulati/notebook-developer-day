@@ -4,7 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_summit_notebook_domain_Author" object="${author}" path="/authors" z="uRnGr9CyyEXCl13pQHGw7p9V3nc=">
         <field:display field="email" id="s_com_summit_notebook_domain_Author_email" object="${author}" z="ocJzzUqQQmjFW72iZRCHdOc9Kqo="/>
-        <field:display field="password" id="s_com_summit_notebook_domain_Author_password" object="${author}" z="/lvpJUF069U86TVIi8pNSPxOkEs="/>
         <field:display field="fullName" id="s_com_summit_notebook_domain_Author_fullName" object="${author}" z="bbuokTX9nXcr1blffEdinHvLMa8="/>
     </page:show>
 </div>

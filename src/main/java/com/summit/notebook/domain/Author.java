@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class Author {
@@ -14,9 +19,20 @@ public class Author {
 	@Column(name = "id")
 	private Long id;
 
+	@NotNull
+	@Email
 	private String email;
+
+	@NotNull
+	@Size(min = 6, max = 10)
 	private String password;
+
+	@NotNull
 	private String fullName;
+
+	@Version
+	@Column(name = "version")
+	private Integer version;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -50,11 +66,18 @@ public class Author {
 		this.fullName = fullName;
 	}
 
+	public Integer getVersion() {
+		return this.version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", email=" + email + ", password="
 				+ password + ", fullName=" + fullName + "]";
 	}
 
-	
 }

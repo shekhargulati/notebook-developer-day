@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_summit_notebook_domain_Author" modelAttribute="author" path="/authors" versionField="Version" z="3Dd0STpmUPL3905kDmpVREPPGJs=">
         <field:input field="email" id="c_com_summit_notebook_domain_Author_email" required="true" validationMessageCode="field_invalid_email" z="1GWViFDuNHiR1Y8WronZX2fVlBw="/>
-        <field:input field="password" id="c_com_summit_notebook_domain_Author_password" required="true" z="FMqh0KgMRfUQmW7NxEVId94PAkI="/>
+        <field:input field="password" id="c_com_summit_notebook_domain_Author_password" required="true" z="FMqh0KgMRfUQmW7NxEVId94PAkI=" type="password"/>
         <field:input field="fullName" id="c_com_summit_notebook_domain_Author_fullName" required="true" z="zXpGYIg3niAkZeUujWuimsp+aD0="/>
     </form:update>
 </div>
