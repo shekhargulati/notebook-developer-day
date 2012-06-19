@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.summit.notebook.domain.Author;
+import com.summit.notebook.jpa.IAuthorRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
@@ -22,11 +23,12 @@ import com.summit.notebook.domain.Author;
 public class AuthorRepositoryTest {
 
 	@Autowired
-	private AuthorRepository authorRepository;
+	private IAuthorRepository authorRepository;
 	
 	@Test
 	public void testPersist() {
-		persistAuthor();
+		Author persistAuthor = persistAuthor();
+		System.out.println(persistAuthor);
 		long countAuthors = authorRepository.countAuthors();
 		assertEquals(1, countAuthors);
 		 

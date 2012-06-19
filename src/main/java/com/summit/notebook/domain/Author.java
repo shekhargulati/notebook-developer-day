@@ -50,4 +50,11 @@ public class Author {
 		this.fullName = fullName;
 	}
 
+	@Override
+	public String toString() {
+		return "Author [id=" + id + ", email=" + email + ", password="
+				+ password + ", fullName=" + fullName + "]";
+	}
+
+	
 }

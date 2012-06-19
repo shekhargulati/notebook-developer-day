@@ -17,14 +17,14 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import com.summit.notebook.domain.Author;
-import com.summit.notebook.repository.AuthorRepository;
+import com.summit.notebook.jpa.IAuthorRepository;
 
 @RequestMapping("/authors")
 @Controller
 public class AuthorController {
 
 	@Autowired
-	private AuthorRepository authorRepository;
+	private IAuthorRepository authorRepository;
 	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String create(@Valid Author author, BindingResult bindingResult,
@@ -35,6 +35,7 @@ public class AuthorController {
 		}
 		uiModel.asMap().clear();
 		authorRepository.persist(author);
+		System.out.println(author);
 		return "redirect:/authors/"
 				+ encodeUrlPathSegment(author.getId().toString(),
 						httpServletRequest);

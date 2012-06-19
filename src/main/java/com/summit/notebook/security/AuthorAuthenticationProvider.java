@@ -16,14 +16,14 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.summit.notebook.domain.Author;
-import com.summit.notebook.repository.AuthorRepository;
+import com.summit.notebook.jpa.IAuthorRepository;
 
 
 @Component
 public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
 	@Autowired
-	private AuthorRepository authorRepository;
+	private IAuthorRepository authorRepository;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails arg0, UsernamePasswordAuthenticationToken arg1) throws AuthenticationException {
