@@ -38,6 +38,7 @@ public class AuthorRepositoryTest {
 		author.setEmail("test@gmail.com");
 		author.setPassword("password");
 		author.setFullName("Shekhar Gulati");
+		author.setUsername("shekhargulati");
 		authorRepository.persist(author);
 		return author;
 	}
@@ -59,7 +60,7 @@ public class AuthorRepositoryTest {
 	@Test
 	public void testFindByEmailAndPassword(){
 		persistAuthor();
-		Author author = authorRepository.findAuthorByEmailAndPassword("test@gmail.com", "password");
+		Author author = authorRepository.findAuthorByUsernameAndPassword("shekhargulati", "password");
 		Assert.assertNotNull(author);
 	}
 

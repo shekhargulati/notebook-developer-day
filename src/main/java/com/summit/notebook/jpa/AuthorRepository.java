@@ -75,12 +75,12 @@ public class AuthorRepository implements IAuthorRepository {
 	 * (java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Author findAuthorByEmailAndPassword(String email, String password) {
+	public Author findAuthorByUsernameAndPassword(String username, String password) {
 		TypedQuery<Author> query = entityManager
 				.createQuery(
-						"SELECT o FROM Author o where o.email = :email and o.password = :password",
+						"SELECT o FROM Author o where o.username = :username and o.password = :password",
 						Author.class);
-		query.setParameter("email", email);
+		query.setParameter("username", username);
 		query.setParameter("password", password);
 		return query.getSingleResult();
 	}
@@ -146,5 +146,15 @@ public class AuthorRepository implements IAuthorRepository {
 		Author merged = entityManager.merge(author);
 		entityManager.flush();
 		return merged;
+	}
+
+	@Override
+	public Author findAuthorByUsername(String username) {
+		TypedQuery<Author> query = entityManager
+				.createQuery(
+						"SELECT o FROM Author o where o.username = :username",
+						Author.class);
+		query.setParameter("username", username);
+		return query.getSingleResult();
 	}
 }

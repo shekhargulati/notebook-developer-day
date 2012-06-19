@@ -3,6 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_summit_notebook_domain_Author" modelAttribute="author" path="/authors" render="${empty dependencies}" z="MG2DuhvbK0S9QqUqGD4tJyIhagM=">
+    	<field:input field="username" id="c_com_summit_notebook_domain_Author_username" required="true" label="Username" z="user-managed"/>
         <field:input field="email" id="c_com_summit_notebook_domain_Author_email" required="true" validationMessageCode="field_invalid_email" z="1GWViFDuNHiR1Y8WronZX2fVlBw="/>
         <field:input field="password" id="c_com_summit_notebook_domain_Author_password" required="true" z="FMqh0KgMRfUQmW7NxEVId94PAkI=" type="password"/>
         <field:input field="fullName" id="c_com_summit_notebook_domain_Author_fullName" required="true" z="zXpGYIg3niAkZeUujWuimsp+aD0="/>

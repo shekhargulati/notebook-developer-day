@@ -52,6 +52,14 @@ public class AuthorController {
 		uiModel.addAttribute("itemId", id);
 		return "authors/show";
 	}
+	
+	@RequestMapping(value = "/profile/{username}", produces = "text/html")
+	public String showUser(@PathVariable("username") String username, Model uiModel) {
+		Author author = authorRepository.findAuthorByUsername(username);
+		uiModel.addAttribute("author", author);
+		uiModel.addAttribute("itemId", author.getId());
+		return "authors/show";
+	}
 
 	@RequestMapping(produces = "text/html")
 	public String list(

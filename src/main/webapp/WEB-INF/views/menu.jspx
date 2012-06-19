@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu"
-	xmlns:sec="http://www.springframework.org/security/tags" id="menu"
+	xmlns:sec="http://www.springframework.org/security/tags" 
+	xmlns:spring="http://www.springframework.org/tags"
+	id="menu"
 	version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
@@ -35,10 +37,12 @@
 					<menu:item id="login" label="SignIn" render="true" url="/login" />
 				</menu:category>
 			</sec:authorize>
+			
 			<sec:authorize access="isAuthenticated()">
-				<menu:item id="i_author_list" messageCode="global_menu_list"
-					url="/authors?page=1&amp;size=${empty param.size ? 10 : param.size}"
-					z="/71/+sYxLDw3jeyTZyEHzZ9CQQQ=" />
+			<spring:eval expression="T(com.summit.notebook.security.SecurityUtils).getCurrentLoggedInUsername()" var="username"></spring:eval>
+				<menu:item id="i_author_list" label="View Profile"
+					url="/authors/profile/${username}"
+					z="user-managed" />
 			</sec:authorize>
 		</menu:category>
 	</menu:menu>

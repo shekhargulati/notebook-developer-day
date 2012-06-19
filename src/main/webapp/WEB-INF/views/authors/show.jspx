@@ -3,7 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_summit_notebook_domain_Author" object="${author}" path="/authors" z="uRnGr9CyyEXCl13pQHGw7p9V3nc=">
-        <field:display field="email" id="s_com_summit_notebook_domain_Author_email" object="${author}" z="ocJzzUqQQmjFW72iZRCHdOc9Kqo="/>
-        <field:display field="fullName" id="s_com_summit_notebook_domain_Author_fullName" object="${author}" z="bbuokTX9nXcr1blffEdinHvLMa8="/>
+    	<field:display field="username" id="s_com_summit_notebook_domain_Author_username" label="Username" object="${author}" z="user-managed"/>
+        <field:display field="email" id="s_com_summit_notebook_domain_Author_email" object="${author}" z="user-managed"/>
+        <field:display field="fullName" id="s_com_summit_notebook_domain_Author_fullName" object="${author}" z="user-managed"/>
     </page:show>
 </div>

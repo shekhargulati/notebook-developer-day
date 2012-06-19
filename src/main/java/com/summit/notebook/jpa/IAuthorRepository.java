@@ -15,7 +15,7 @@ public interface IAuthorRepository {
 	public abstract List<Author> findAuthorEntries(int firstResult,
 			int maxResults);
 
-	public abstract Author findAuthorByEmailAndPassword(String email,
+	public abstract Author findAuthorByUsernameAndPassword(String email,
 			String password);
 
 	public abstract void persist(Author author);
@@ -27,5 +27,7 @@ public interface IAuthorRepository {
 	public abstract void clear();
 
 	public abstract Author merge(Author author);
+
+	public abstract Author findAuthorByUsername(String username);
 
 }

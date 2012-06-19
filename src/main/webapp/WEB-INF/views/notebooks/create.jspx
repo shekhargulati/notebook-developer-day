@@ -5,7 +5,6 @@
     <form:create id="fc_com_summit_notebook_domain_Notebook" modelAttribute="notebook" path="/notebooks" render="${empty dependencies}" z="PZQQxfczdn23VAxbSLeGkBvC9wk=">
         <field:input field="name" id="c_com_summit_notebook_domain_Notebook_name" required="true" z="Ffp2SbNRI4YVfz8qh5YC4jQmrJs="/>
         <field:textarea field="description" id="c_com_summit_notebook_domain_Notebook_description" required="true" z="/O9dlTTmfLTMbjAfYf7TFyfRmhE="/>
-        <field:input field="author" id="c_com_summit_notebook_domain_Notebook_author" required="true" z="8EmC9lUq7P8Z1FVJa9+PUv4Q3hg="/>
         <field:input field="tags" id="c_com_summit_notebook_domain_Notebook_tags" required="true" z="3T0VL4NLMyCJ1w87vBxyXcIbwPc="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_summit_notebook_domain_Notebook" render="${not empty dependencies}" z="64Wfv0oW7Ye7KMRST4dpFTXwcR8="/>

@@ -20,6 +20,9 @@ public class Author {
 	private Long id;
 
 	@NotNull
+	private String username;
+
+	@NotNull
 	@Email
 	private String email;
 
@@ -66,6 +69,14 @@ public class Author {
 		this.fullName = fullName;
 	}
 
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
 	public Integer getVersion() {
 		return this.version;
 	}
@@ -76,8 +87,9 @@ public class Author {
 
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", email=" + email + ", password="
-				+ password + ", fullName=" + fullName + "]";
+		return "Author [id=" + id + ", username=" + username + ", email="
+				+ email + ", password=" + password + ", fullName=" + fullName
+				+ ", version=" + version + "]";
 	}
 
 }

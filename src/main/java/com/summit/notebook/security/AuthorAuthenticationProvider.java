@@ -31,14 +31,14 @@ public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticat
     }
 
     @Override
-    protected UserDetails retrieveUser(String email, UsernamePasswordAuthenticationToken authenticationToken) throws AuthenticationException {
+    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authenticationToken) throws AuthenticationException {
         String password = (String) authenticationToken.getCredentials();
         if (!StringUtils.hasText(password)) {
             throw new BadCredentialsException("Please enter password");
         }
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         try {
-            Author user = authorRepository.findAuthorByEmailAndPassword(email,password);
+            Author user = authorRepository.findAuthorByUsernameAndPassword(username,password);
             if(user == null){
                 throw new RuntimeException("User does not exist..");
             }
@@ -46,7 +46,7 @@ public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticat
         } catch (Exception e) {
             throw new BadCredentialsException("Non-unique user, contact administrator");
         }
-        return new User(email, password, true, // enabled
+        return new User(username, password, true, // enabled
                 true, // account not expired
                 true, // credentials not expired
                 true, // account not locked
