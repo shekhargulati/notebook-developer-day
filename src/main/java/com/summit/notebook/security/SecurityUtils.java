@@ -1,4 +1,5 @@
 package com.summit.notebook.security;
+
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 

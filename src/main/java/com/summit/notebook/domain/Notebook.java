@@ -24,96 +24,106 @@ import flexjson.JSONSerializer;
 @Persistent
 public class Notebook {
 
-	@NotNull
-	private String name;
+    @Id
+    private BigInteger id;
 
-	@NotNull
-	@Size(max = 4000)
-	private String description;
+    @NotNull
+    private String name;
 
-	@NotNull
-	@Column(updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "M-")
-	private Date created = new Date();
+    @NotNull
+    @Size(max = 4000)
+    private String description;
 
-	private String author;
+    @NotNull
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date created = new Date();
 
-	@NotNull
-	private String[] tags;
-	
-	@Id
-	private BigInteger id;
+    private String author;
 
-	public BigInteger getId() {
-		return this.id;
-	}
+    @NotNull
+    private String[] tags;
 
-	public void setId(BigInteger id) {
-		this.id = id;
-	}
+    private List<Note> notes = new ArrayList<Note>();
 
-	public String getName() {
-		return this.name;
-	}
+    public BigInteger getId() {
+        return this.id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Date getCreated() {
-		return this.created;
-	}
+    public String getDescription() {
+        return this.description;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getAuthor() {
-		return this.author;
-	}
+    public Date getCreated() {
+        return this.created;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public String[] getTags() {
-		return this.tags;
-	}
+    public String getAuthor() {
+        return this.author;
+    }
 
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-	
-	public String toJson() {
-		return new JSONSerializer().exclude("*.class").serialize(this);
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public static Notebook fromJsonToNotebook(String json) {
-		return new JSONDeserializer<Notebook>().use(null, Notebook.class)
-				.deserialize(json);
-	}
+    public String[] getTags() {
+        return this.tags;
+    }
 
-	public static String toJsonArray(Collection<Notebook> collection) {
-		return new JSONSerializer().exclude("*.class").serialize(collection);
-	}
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
 
-	public static Collection<Notebook> fromJsonArrayToNotebooks(String json) {
-		return new JSONDeserializer<List<Notebook>>()
-				.use(null, ArrayList.class).use("values", Notebook.class)
-				.deserialize(json);
-	}
-	
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this,
-				ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public String toJson() {
+        return new JSONSerializer().exclude("*.class").serialize(this);
+    }
+
+    public static Notebook fromJsonToNotebook(String json) {
+        return new JSONDeserializer<Notebook>().use(null, Notebook.class)
+                .deserialize(json);
+    }
+
+    public static String toJsonArray(Collection<Notebook> collection) {
+        return new JSONSerializer().exclude("*.class").serialize(collection);
+    }
+
+    public static Collection<Notebook> fromJsonArrayToNotebooks(String json) {
+        return new JSONDeserializer<List<Notebook>>()
+                .use(null, ArrayList.class).use("values", Notebook.class)
+                .deserialize(json);
+    }
+
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this,
+                ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

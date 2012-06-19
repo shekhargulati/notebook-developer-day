@@ -22,46 +22,47 @@ import com.summit.notebook.jpa.IAuthorRepository;
 @ActiveProfiles("test")
 public class AuthorRepositoryTest {
 
-	@Autowired
-	private IAuthorRepository authorRepository;
-	
-	@Test
-	public void testPersist() {
-		Author persistAuthor = persistAuthor();
-		System.out.println(persistAuthor);
-		long countAuthors = authorRepository.countAuthors();
-		assertEquals(1, countAuthors);
-		 
-	}
-	private Author persistAuthor() {
-		Author author = new Author();
-		author.setEmail("test@gmail.com");
-		author.setPassword("password");
-		author.setFullName("Shekhar Gulati");
-		author.setUsername("shekhargulati");
-		authorRepository.persist(author);
-		return author;
-	}
+    @Autowired
+    private IAuthorRepository authorRepository;
 
-	@Test
-	public void testFindAllAuthors() {
-		persistAuthor();
-		List<Author> authors = authorRepository.findAllAuthors();
-		assertEquals(1, authors.size());
-	}
+    @Test
+    public void testPersist() {
+        Author persistAuthor = persistAuthor();
+        System.out.println(persistAuthor);
+        long countAuthors = authorRepository.countAuthors();
+        assertEquals(1, countAuthors);
 
-	@Test
-	public void testFindAuthor() {
-		Author persistAuthor = persistAuthor();
-		Author findAuthor = authorRepository.findAuthor(persistAuthor.getId());
-		assertEquals("test@gmail.com", findAuthor.getEmail());
-	}
-	
-	@Test
-	public void testFindByEmailAndPassword(){
-		persistAuthor();
-		Author author = authorRepository.findAuthorByUsernameAndPassword("shekhargulati", "password");
-		Assert.assertNotNull(author);
-	}
+    }
+
+    private Author persistAuthor() {
+        Author author = new Author();
+        author.setEmail("test@gmail.com");
+        author.setPassword("password");
+        author.setFullName("Shekhar Gulati");
+        author.setUsername("shekhargulati");
+        authorRepository.persist(author);
+        return author;
+    }
+
+    @Test
+    public void testFindAllAuthors() {
+        persistAuthor();
+        List<Author> authors = authorRepository.findAllAuthors();
+        assertEquals(1, authors.size());
+    }
+
+    @Test
+    public void testFindAuthor() {
+        Author persistAuthor = persistAuthor();
+        Author findAuthor = authorRepository.findAuthor(persistAuthor.getId());
+        assertEquals("test@gmail.com", findAuthor.getEmail());
+    }
+
+    @Test
+    public void testFindByEmailAndPassword() {
+        persistAuthor();
+        Author author = authorRepository.findAuthorByUsernameAndPassword("shekhargulati", "password");
+        Assert.assertNotNull(author);
+    }
 
 }

@@ -1,31 +1,39 @@
 package com.summit.notebook.service;
 
-import com.summit.notebook.domain.Notebook;
 import java.math.BigInteger;
 import java.util.List;
-import org.springframework.roo.addon.layers.service.RooService;
 
-@RooService(domainTypes = { com.summit.notebook.domain.Notebook.class })
+import com.summit.notebook.domain.Note;
+import com.summit.notebook.domain.Notebook;
+
 public interface NotebookService {
 
-	public abstract long countAllNotebooks();
+    public abstract long countAllNotebooks();
 
+    public abstract void deleteNotebook(Notebook notebook);
 
-	public abstract void deleteNotebook(Notebook notebook);
+    public abstract Notebook findNotebook(BigInteger id);
 
+    public abstract List<Notebook> findAllNotebooks();
 
-	public abstract Notebook findNotebook(BigInteger id);
+    public abstract List<Notebook> findNotebookEntries(int firstResult, int maxResults);
 
+    public abstract void saveNotebook(Notebook notebook);
 
-	public abstract List<Notebook> findAllNotebooks();
+    public abstract Notebook updateNotebook(Notebook notebook);
 
+    public void pushNotesToNotebook(BigInteger notebookId, Note note);
 
-	public abstract List<Notebook> findNotebookEntries(int firstResult, int maxResults);
+    public List<Note> findAllNotes(BigInteger notebookId);
 
+    public List<Note> findNotes(BigInteger notebookId, int start, int end);
 
-	public abstract void saveNotebook(Notebook notebook);
+    int notesCount(BigInteger notebookId);
 
+    public Note findNote(BigInteger notebookId, String noteId);
 
-	public abstract Notebook updateNotebook(Notebook notebook);
+    public void updateNote(BigInteger notebookId, Note note);
+
+    void removeNoteFromNotebook(BigInteger notebookId, String noteId);
 
 }

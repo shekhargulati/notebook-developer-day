@@ -1,6 +1,5 @@
 package com.summit.notebook.domain;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -24,85 +23,85 @@ import flexjson.JSONSerializer;
 @Persistent
 public class Note {
 
-	@NotNull
-	private String title;
+    @NotNull
+    private String title;
 
-	@NotNull
-	@Size(max = 4000)
-	private String text;
+    @NotNull
+    @Size(max = 4000)
+    private String text;
 
-	@NotNull
-	@Column(updatable = false)
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(style = "M-")
-	private Date created = new Date();
+    @NotNull
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date created = new Date();
 
-	@NotNull
-	private String[] tags;
+    @NotNull
+    private String[] tags;
 
-	@Id
-	private BigInteger id;
+    @Id
+    private String id;
 
-	public BigInteger getId() {
-		return this.id;
-	}
+    public String getId() {
+        return this.id;
+    }
 
-	public void setId(BigInteger id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return this.title;
-	}
+    public String getTitle() {
+        return this.title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getText() {
-		return this.text;
-	}
+    public String getText() {
+        return this.text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public Date getCreated() {
-		return this.created;
-	}
+    public Date getCreated() {
+        return this.created;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public String[] getTags() {
-		return this.tags;
-	}
+    public String[] getTags() {
+        return this.tags;
+    }
 
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
+    public void setTags(String[] tags) {
+        this.tags = tags;
+    }
 
-	public String toJson() {
-		return new JSONSerializer().exclude("*.class").serialize(this);
-	}
+    public String toJson() {
+        return new JSONSerializer().exclude("*.class").serialize(this);
+    }
 
-	public static Note fromJsonToNote(String json) {
-		return new JSONDeserializer<Note>().use(null, Note.class).deserialize(
-				json);
-	}
+    public static Note fromJsonToNote(String json) {
+        return new JSONDeserializer<Note>().use(null, Note.class).deserialize(
+                json);
+    }
 
-	public static String toJsonArray(Collection<Note> collection) {
-		return new JSONSerializer().exclude("*.class").serialize(collection);
-	}
+    public static String toJsonArray(Collection<Note> collection) {
+        return new JSONSerializer().exclude("*.class").serialize(collection);
+    }
 
-	public static Collection<Note> fromJsonArrayToNotes(String json) {
-		return new JSONDeserializer<List<Note>>().use(null, ArrayList.class)
-				.use("values", Note.class).deserialize(json);
-	}
+    public static Collection<Note> fromJsonArrayToNotes(String json) {
+        return new JSONDeserializer<List<Note>>().use(null, ArrayList.class)
+                .use("values", Note.class).deserialize(json);
+    }
 
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this,
-				ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    public String toString() {
+        return ReflectionToStringBuilder.toString(this,
+                ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -18,12 +18,11 @@ import org.springframework.util.StringUtils;
 import com.summit.notebook.domain.Author;
 import com.summit.notebook.jpa.IAuthorRepository;
 
-
 @Component
 public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-	@Autowired
-	private IAuthorRepository authorRepository;
+    @Autowired
+    private IAuthorRepository authorRepository;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails arg0, UsernamePasswordAuthenticationToken arg1) throws AuthenticationException {
@@ -38,8 +37,8 @@ public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticat
         }
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         try {
-            Author user = authorRepository.findAuthorByUsernameAndPassword(username,password);
-            if(user == null){
+            Author user = authorRepository.findAuthorByUsernameAndPassword(username, password);
+            if (user == null) {
                 throw new RuntimeException("User does not exist..");
             }
             authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

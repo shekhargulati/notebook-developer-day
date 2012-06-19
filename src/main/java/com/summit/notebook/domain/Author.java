@@ -14,82 +14,82 @@ import org.hibernate.validator.constraints.Email;
 @Entity
 public class Author {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
-	@NotNull
-	private String username;
+    @NotNull
+    private String username;
 
-	@NotNull
-	@Email
-	private String email;
+    @NotNull
+    @Email
+    private String email;
 
-	@NotNull
-	@Size(min = 6, max = 10)
-	private String password;
+    @NotNull
+    @Size(min = 6, max = 10)
+    private String password;
 
-	@NotNull
-	private String fullName;
+    @NotNull
+    private String fullName;
 
-	@Version
-	@Column(name = "version")
-	private Integer version;
+    @Version
+    @Column(name = "version")
+    private Integer version;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getFullName() {
-		return fullName;
-	}
+    public String getFullName() {
+        return fullName;
+    }
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public Integer getVersion() {
-		return this.version;
-	}
+    public Integer getVersion() {
+        return this.version;
+    }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
-	@Override
-	public String toString() {
-		return "Author [id=" + id + ", username=" + username + ", email="
-				+ email + ", password=" + password + ", fullName=" + fullName
-				+ ", version=" + version + "]";
-	}
+    @Override
+    public String toString() {
+        return "Author [id=" + id + ", username=" + username + ", email="
+                + email + ", password=" + password + ", fullName=" + fullName
+                + ", version=" + version + "]";
+    }
 
 }

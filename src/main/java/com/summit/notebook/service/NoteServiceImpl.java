@@ -8,39 +8,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 @Transactional
 public class NoteServiceImpl implements NoteService {
 
-	@Autowired
+    @Autowired
     NoteRepository noteRepository;
 
-	public long countAllNotes() {
+    public long countAllNotes() {
         return noteRepository.count();
     }
 
-	public void deleteNote(Note note) {
+    public void deleteNote(Note note) {
         noteRepository.delete(note);
     }
 
-	public Note findNote(BigInteger id) {
+    public Note findNote(BigInteger id) {
         return noteRepository.findOne(id);
     }
 
-	public List<Note> findAllNotes() {
+    public List<Note> findAllNotes() {
         return noteRepository.findAll();
     }
 
-	public List<Note> findNoteEntries(int firstResult, int maxResults) {
+    public List<Note> findNoteEntries(int firstResult, int maxResults) {
         return noteRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
-	public void saveNote(Note note) {
+    public void saveNote(Note note) {
         noteRepository.save(note);
     }
 
-	public Note updateNote(Note note) {
+    public Note updateNote(Note note) {
         return noteRepository.save(note);
     }
 }

@@ -19,27 +19,28 @@ import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionS
 @RooConversionService
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
-	@Override
-	protected void installFormatters(FormatterRegistry registry) {
-		super.installFormatters(registry);
-		// Register application converters and formatters
-	}
+    @Override
+    protected void installFormatters(FormatterRegistry registry) {
+        super.installFormatters(registry);
+        // Register application converters and formatters
+    }
 
-	@Autowired
+    @Autowired
     NoteService noteService;
 
-	@Autowired
+    @Autowired
     NotebookService notebookService;
 
-	public Converter<Note, String> getNoteToStringConverter() {
+    public Converter<Note, String> getNoteToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.summit.notebook.domain.Note, java.lang.String>() {
             public String convert(Note note) {
-                return new StringBuilder().append(note.getTitle()).append(" ").append(note.getText()).append(" ").append(note.getCreated()).toString();
+                return new StringBuilder().append(note.getTitle()).append(" ").append(note.getText()).append(" ").append(note.getCreated())
+                        .toString();
             }
         };
     }
 
-	public Converter<BigInteger, Note> getIdToNoteConverter() {
+    public Converter<BigInteger, Note> getIdToNoteConverter() {
         return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.summit.notebook.domain.Note>() {
             public com.summit.notebook.domain.Note convert(java.math.BigInteger id) {
                 return noteService.findNote(id);
@@ -47,7 +48,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<String, Note> getStringToNoteConverter() {
+    public Converter<String, Note> getStringToNoteConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.summit.notebook.domain.Note>() {
             public com.summit.notebook.domain.Note convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), Note.class);
@@ -55,15 +56,16 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<Notebook, String> getNotebookToStringConverter() {
+    public Converter<Notebook, String> getNotebookToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.summit.notebook.domain.Notebook, java.lang.String>() {
             public String convert(Notebook notebook) {
-                return new StringBuilder().append(notebook.getName()).append(" ").append(notebook.getDescription()).append(" ").append(notebook.getCreated()).append(" ").append(notebook.getAuthor()).toString();
+                return new StringBuilder().append(notebook.getName()).append(" ").append(notebook.getDescription()).append(" ")
+                        .append(notebook.getCreated()).append(" ").append(notebook.getAuthor()).toString();
             }
         };
     }
 
-	public Converter<BigInteger, Notebook> getIdToNotebookConverter() {
+    public Converter<BigInteger, Notebook> getIdToNotebookConverter() {
         return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.summit.notebook.domain.Notebook>() {
             public com.summit.notebook.domain.Notebook convert(java.math.BigInteger id) {
                 return notebookService.findNotebook(id);
@@ -71,7 +73,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<String, Notebook> getStringToNotebookConverter() {
+    public Converter<String, Notebook> getStringToNotebookConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.summit.notebook.domain.Notebook>() {
             public com.summit.notebook.domain.Notebook convert(String id) {
                 return getObject().convert(getObject().convert(id, BigInteger.class), Notebook.class);
@@ -79,7 +81,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public void installLabelConverters(FormatterRegistry registry) {
+    public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getNoteToStringConverter());
         registry.addConverter(getIdToNoteConverter());
         registry.addConverter(getStringToNoteConverter());
@@ -88,7 +90,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getStringToNotebookConverter());
     }
 
-	public void afterPropertiesSet() {
+    public void afterPropertiesSet() {
         super.afterPropertiesSet();
         installLabelConverters(getObject());
     }
