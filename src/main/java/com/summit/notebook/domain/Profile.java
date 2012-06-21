@@ -10,9 +10,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.social.connect.UserProfile;
 
 @Entity
-public class Author {
+public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +37,16 @@ public class Author {
     @Version
     @Column(name = "version")
     private Integer version;
+
+    public Profile() {
+        // TODO Auto-generated constructor stub
+    }
+
+    Profile(UserProfile userProfile) {
+        this.username = userProfile.getUsername();
+        this.email = userProfile.getEmail();
+        this.fullName = userProfile.getFirstName() + " " + userProfile.getLastName();
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -90,6 +101,11 @@ public class Author {
         return "Author [id=" + id + ", username=" + username + ", email="
                 + email + ", password=" + password + ", fullName=" + fullName
                 + ", version=" + version + "]";
+    }
+
+    public static Profile fromTwitterProfile(UserProfile fetchUserProfile) {
+        Profile profile = new Profile(fetchUserProfile);
+        return profile;
     }
 
 }

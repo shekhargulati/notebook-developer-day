@@ -3,12 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     
-    <page:list id="pl_com_summit_notebook_domain_Note" items="${notes}" z="HFtaDraNHcc5djP+x5s+ijNKUBA=">
-        <table:table data="${notes}" id="l_com_summit_notebook_domain_Note" path="/notebooks/${notebookId}/notes" z="XqdEGDmL6lYoOgzskWSyKv37hFw=">
-            <table:column id="c_com_summit_notebook_domain_Note_title" property="title" z="waGQKi2qIs+3zg7KTdLW9FQbtEk="/>
-            <table:column id="c_com_summit_notebook_domain_Note_text" property="text" z="W5SFn1p8oZFJPr+UD12RIz3IaWM="/>
-            <table:column date="true" dateTimePattern="${note_created_date_format}" id="c_com_summit_notebook_domain_Note_created" property="created" z="n5Uh3h+8ud0groB1N4W0Rkew49g="/>
-            <table:column id="c_com_summit_notebook_domain_Note_tags" property="tags" z="eLCXf+VKVZTVaCdOd0UJPrtnpfQ="/>
+    <page:list id="pl_com_summit_notebook_domain_Note" items="${notes}" z="user-managed" label="Notes for ${notebook.name}">
+        <table:table data="${notes}" id="l_com_summit_notebook_domain_Note" path="/notebooks/${notebookId}/notes" z="user-managed">
+            <table:column id="c_com_summit_notebook_domain_Note_title" property="title" z="user-managed"/>
+            <table:column id="c_com_summit_notebook_domain_Note_text" property="text" z="user-managed"/>
+            <table:column date="true" dateTimePattern="${note_created_date_format}" id="c_com_summit_notebook_domain_Note_created" property="created" z="user-managed"/>
+            <table:column id="c_com_summit_notebook_domain_Note_tags" property="tags" z="user-managed"/>
         </table:table>
     </page:list>
     

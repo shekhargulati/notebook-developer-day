@@ -69,7 +69,7 @@ public class NoteController {
         uiModel.addAttribute("note",
                 notebookService.findNote(notebookId, noteId));
         uiModel.addAttribute("itemId", noteId);
-        uiModel.addAttribute("notebookId", notebookId);
+        uiModel.addAttribute("notebook", notebookService.findNotebook(notebookId));
         return "notes/show";
     }
 
@@ -97,7 +97,7 @@ public class NoteController {
         return "notes/list";
     }
 
-    @RequestMapping(value = "/notebooks/{notebookId}/notes", method = RequestMethod.PUT, produces = "text/html")
+    @RequestMapping(value = "/{notebookId}/notes/update", method = RequestMethod.PUT, produces = "text/html")
     public String update(@PathVariable("notebookId") BigInteger notebookId,
             @Valid Note note, BindingResult bindingResult, Model uiModel,
             HttpServletRequest httpServletRequest) {

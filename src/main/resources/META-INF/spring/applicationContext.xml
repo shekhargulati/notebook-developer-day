@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.1.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
@@ -48,21 +45,49 @@
 		Edition annotations in your classes without needing to do any special configuration. 
 		The most commonly used annotation is @Autowired, which instructs Spring to 
 		dependency inject an object into your class. -->
-	<context:component-scan base-package="com.summit.notebook.domain,com.summit.notebook.jpa,com.summit.notebook.repository,com.summit.notebook.service,com.summit.notebook.config">
+	<context:component-scan
+		base-package="com.summit.notebook.domain,com.summit.notebook.dao,com.summit.notebook.repository,com.summit.notebook.service,com.summit.notebook.config">
 	</context:component-scan>
 
-    
-    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-    
-    <tx:annotation-driven transaction-manager="transactionManager"/>
-    
-    <bean
+
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
 		id="entityManagerFactory" p:dataSource-ref="dataSource"
 		p:jpaVendorAdapter-ref="jpaVendorAdapter" p:persistenceUnitName="${jpa.database.name}"
 		p:persistenceXmlLocation="classpath:/META-INF/jpa-persistence.xml" />
+
+	<bean id="appDbInitializer"
+		class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
+		<property name="dataSource" ref="dataSource" />
+		<property name="enabled" value="true" />
+		<property name="databasePopulator">
+			<bean
+				class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
+				<property name="continueOnError" value="true" />
+				<property name="ignoreFailedDrops" value="true" />
+				<property name="sqlScriptEncoding" value="UTF-8" />
+				<property name="scripts">
+					<array>
+						<value type="org.springframework.core.io.Resource">
+							classpath:META-INF/spring/drop-tables.sql
+						</value>
+						<value type="org.springframework.core.io.Resource">
+							classpath:META-INF/spring/create-tables.sql
+						</value>
+					</array>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+
 
 	<beans profile="test">
 		<jdbc:embedded-database id="dataSource" />

@@ -12,25 +12,22 @@
   <c:if test="${pageContext['request'].userPrincipal != null}">
     <c:out value=" | "/>
     <span>
-      <spring:url value="/resources/j_spring_security_logout" var="logout"/>
+      <spring:url value="/signout" var="logout"/>
       <a href="${logout}">
         <spring:message code="security_logout"/>
       </a>
     </span>
   </c:if>
 
-  <span id="language">
+     <span id="github">
     <c:out value=" | "/>
-    <spring:message code="global_language"/>
-    <c:out value=": "/>
-  <util:language label="English" locale="en"/>
+    <spring:message text="Source code on Github" var="github"/>
+    <a href="https://github.com/shekhargulati/notebook" target="_blank">${github}</a>
     </span>
-  <util:theme/>
 
-  <spring:url value="/resources/images/springsource-logo.png" var="logo"/>
-  <spring:message code="global_sponsored" htmlEscape="false" var="sponsored"/>
+  <spring:url value="/resources/images/openshift-icon.jpg" var="logo"/>
   <span>
-    <a href="http://springsource.com" title="${fn:escapeXml(sponsored)}">
+    <a href="https://openshift.redhat.com/" title="${fn:escapeXml(sponsored)}" target="_blank">
       <img align="right" alt="${fn:escapeXml(sponsored)}" src="${logo}"/>
     </a>
   </span>

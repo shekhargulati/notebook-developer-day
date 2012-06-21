@@ -5,7 +5,7 @@
     <page:show id="ps_com_summit_notebook_domain_Notebook" object="${notebook}" path="/notebooks" z="i+Lqhijmk709PTYjre29BWwptdw=">
         <field:display field="name" id="s_com_summit_notebook_domain_Notebook_name" object="${notebook}" z="0NJKPPwSuUb9m4+5acZlAaWQ7kE="/>
         <field:display field="description" id="s_com_summit_notebook_domain_Notebook_description" object="${notebook}" z="D/j7OD+cyrMKkFXcG36vzZskQ2Q="/>
-        <field:display field="author" id="s_com_summit_notebook_domain_Notebook_author" object="${notebook}" z="7rNNasep0GzPniEXzVjeqyVOPyM="/>
+        <field:display field="author" id="s_com_summit_notebook_domain_Notebook_profile" object="${notebook}" z="7rNNasep0GzPniEXzVjeqyVOPyM="/>
         <field:display field="tags" id="s_com_summit_notebook_domain_Notebook_tags" object="${notebook}" z="6wsQLpsGEgK/Flf9W4UCrOKpCQA="/>
     </page:show>
 </div>

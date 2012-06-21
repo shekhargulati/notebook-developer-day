@@ -10,9 +10,8 @@
 
 	<!-- HTTP security configurations -->
 	<http auto-config="true" use-expressions="true">
-		<form-login login-processing-url="/signin/authenticate"
-			login-page="/signin" authentication-failure-url="/login?login_error=t" />
-		<logout logout-url="/resources/j_spring_security_logout" />
+		<form-login login-page="/signin" login-processing-url="/signin/authenticate" authentication-failure-url="/signin?param.error=bad_credentials" />
+		<logout logout-url="/signout" delete-cookies="JSESSIONID" />
 		<!-- Configure these elements to secure URIs in your application -->
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
@@ -28,8 +27,8 @@
 		<authentication-provider>
 			<password-encoder ref="passwordEncoder" />
 			<jdbc-user-service data-source-ref="dataSource"
-				users-by-username-query="select username, password, true from Account where username = ?"
-				authorities-by-username-query="select username, 'ROLE_USER' from Account where username = ?" />
+				users-by-username-query="select username, password, true from Profile where username = ?"
+				authorities-by-username-query="select username, 'ROLE_USER' from Profile where username = ?" />
 		</authentication-provider>
 	</authentication-manager>
 

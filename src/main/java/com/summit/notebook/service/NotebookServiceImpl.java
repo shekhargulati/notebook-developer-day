@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -88,10 +89,10 @@ public class NotebookServiceImpl implements NotebookService {
 
     public void updateNote(BigInteger notebookId, Note note) {
         mongoTemplate.updateFirst(
-                Query.query(Criteria.where("id").is(notebookId)
+                Query.query(Criteria.where("_id").is(new ObjectId(notebookId.toString(16)))
                         .and("notes._id").is(note.getId())),
                 new Update().set("notes.$.title", note.getTitle()).set(
-                        "notes.$.content", note.getText()), Notebook.class);
+                        "notes.$.text", note.getText()).set("notes.$.tags", note.getTags()), Notebook.class);
     }
 
     public List<Note> findNotes(final BigInteger notebookId, final int start,

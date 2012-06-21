@@ -20,7 +20,7 @@
     
     <context-param>
 		<param-name>spring.profiles.active</param-name>
-		<param-value>local</param-value>
+		<param-value>openshift</param-value>
 	</context-param>
     
     <filter>

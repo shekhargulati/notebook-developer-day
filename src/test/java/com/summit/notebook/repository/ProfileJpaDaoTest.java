@@ -13,55 +13,55 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.summit.notebook.domain.Author;
-import com.summit.notebook.jpa.IAuthorRepository;
+import com.summit.notebook.dao.ProfileJpaDao;
+import com.summit.notebook.domain.Profile;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 @Transactional
 @ActiveProfiles("test")
-public class AuthorRepositoryTest {
+public class ProfileJpaDaoTest {
 
     @Autowired
-    private IAuthorRepository authorRepository;
+    private ProfileJpaDao profileJpaDao;
 
     @Test
     public void testPersist() {
-        Author persistAuthor = persistAuthor();
-        System.out.println(persistAuthor);
-        long countAuthors = authorRepository.countAuthors();
+        Profile persistedProfile = persistProfile();
+        System.out.println(persistedProfile);
+        long countAuthors = profileJpaDao.countProfiles();
         assertEquals(1, countAuthors);
 
     }
 
-    private Author persistAuthor() {
-        Author author = new Author();
+    private Profile persistProfile() {
+        Profile author = new Profile();
         author.setEmail("test@gmail.com");
         author.setPassword("password");
         author.setFullName("Shekhar Gulati");
         author.setUsername("shekhargulati");
-        authorRepository.persist(author);
+        profileJpaDao.persist(author);
         return author;
     }
 
     @Test
     public void testFindAllAuthors() {
-        persistAuthor();
-        List<Author> authors = authorRepository.findAllAuthors();
+        persistProfile();
+        List<Profile> authors = profileJpaDao.findAllProfiles();
         assertEquals(1, authors.size());
     }
 
     @Test
     public void testFindAuthor() {
-        Author persistAuthor = persistAuthor();
-        Author findAuthor = authorRepository.findAuthor(persistAuthor.getId());
+        Profile persistAuthor = persistProfile();
+        Profile findAuthor = profileJpaDao.findProfile(persistAuthor.getId());
         assertEquals("test@gmail.com", findAuthor.getEmail());
     }
 
     @Test
     public void testFindByEmailAndPassword() {
-        persistAuthor();
-        Author author = authorRepository.findAuthorByUsernameAndPassword("shekhargulati", "password");
+        persistProfile();
+        Profile author = profileJpaDao.findAuthorByUsernameAndPassword("shekhargulati", "password");
         Assert.assertNotNull(author);
     }
 

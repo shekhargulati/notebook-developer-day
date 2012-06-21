@@ -16,25 +16,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.summit.notebook.domain.Author;
-import com.summit.notebook.jpa.IAuthorRepository;
+import com.summit.notebook.dao.ProfileJpaDao;
+import com.summit.notebook.domain.Profile;
 
 @RequestMapping("/authors")
 @Controller
 public class AuthorController {
 
     @Autowired
-    private IAuthorRepository authorRepository;
+    private ProfileJpaDao profileJpaDao;
 
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid Author author, BindingResult bindingResult,
+    public String create(@Valid Profile author, BindingResult bindingResult,
             Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, author);
             return "authors/create";
         }
         uiModel.asMap().clear();
-        authorRepository.persist(author);
+        profileJpaDao.persist(author);
         return "redirect:/authors/"
                 + encodeUrlPathSegment(author.getId().toString(),
                         httpServletRequest);
@@ -42,20 +42,20 @@ public class AuthorController {
 
     @RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new Author());
+        populateEditForm(uiModel, new Profile());
         return "authors/create";
     }
 
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("author", authorRepository.findAuthor(id));
+        uiModel.addAttribute("author", profileJpaDao.findProfile(id));
         uiModel.addAttribute("itemId", id);
         return "authors/show";
     }
 
     @RequestMapping(value = "/profile/{username}", produces = "text/html")
     public String showUser(@PathVariable("username") String username, Model uiModel) {
-        Author author = authorRepository.findAuthorByUsername(username);
+        Profile author = profileJpaDao.findProfileByUsername(username);
         uiModel.addAttribute("author", author);
         uiModel.addAttribute("itemId", author.getId());
         return "authors/show";
@@ -71,27 +71,27 @@ public class AuthorController {
             final int firstResult = page == null ? 0 : (page.intValue() - 1)
                     * sizeNo;
             uiModel.addAttribute("authors",
-                    authorRepository.findAuthorEntries(firstResult, sizeNo));
-            float nrOfPages = (float) authorRepository.countAuthors() / sizeNo;
+                    profileJpaDao.findProfileEntries(firstResult, sizeNo));
+            float nrOfPages = (float) profileJpaDao.countProfiles() / sizeNo;
             uiModel.addAttribute(
                     "maxPages",
                     (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1
                             : nrOfPages));
         } else {
-            uiModel.addAttribute("authors", authorRepository.findAllAuthors());
+            uiModel.addAttribute("authors", profileJpaDao.findAllProfiles());
         }
         return "authors/list";
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid Author author, BindingResult bindingResult,
+    public String update(@Valid Profile author, BindingResult bindingResult,
             Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, author);
             return "authors/update";
         }
         uiModel.asMap().clear();
-        authorRepository.merge(author);
+        profileJpaDao.merge(author);
         return "redirect:/authors/"
                 + encodeUrlPathSegment(author.getId().toString(),
                         httpServletRequest);
@@ -99,7 +99,7 @@ public class AuthorController {
 
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, authorRepository.findAuthor(id));
+        populateEditForm(uiModel, profileJpaDao.findProfile(id));
         return "authors/update";
     }
 
@@ -108,15 +108,15 @@ public class AuthorController {
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size,
             Model uiModel) {
-        Author author = authorRepository.findAuthor(id);
-        authorRepository.remove(author);
+        Profile author = profileJpaDao.findProfile(id);
+        profileJpaDao.remove(author);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/authors";
     }
 
-    void populateEditForm(Model uiModel, Author author) {
+    void populateEditForm(Model uiModel, Profile author) {
         uiModel.addAttribute("author", author);
     }
 

@@ -7,7 +7,7 @@
             <table:column id="c_com_summit_notebook_domain_Notebook_name" property="name" z="pU+fQAxEbnpnt46typwr7/p7Y/U="/>
             <table:column id="c_com_summit_notebook_domain_Notebook_description" property="description" z="q4nlFWgUNu6h+KtMdiyRZyKLhEY="/>
             <table:column date="true" dateTimePattern="${notebook_created_date_format}" id="c_com_summit_notebook_domain_Notebook_created" property="created" z="u4FMbQWl+y7EzYeHLwo7XXcXBd8="/>
-            <table:column id="c_com_summit_notebook_domain_Notebook_author" property="author" z="GLKXXm9HsgI2Rax+5Lka2pboV8s="/>
+            <table:column id="c_com_summit_notebook_domain_Notebook_profile" property="author" z="GLKXXm9HsgI2Rax+5Lka2pboV8s="/>
             <table:column id="c_com_summit_notebook_domain_Notebook_tags" property="tags" z="d/aTk0lVFXN9XkHzxxhhWqw2Kjw="/>
         </table:table>
     </page:list>

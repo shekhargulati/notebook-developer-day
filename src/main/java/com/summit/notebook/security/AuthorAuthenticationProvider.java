@@ -15,14 +15,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.summit.notebook.domain.Author;
-import com.summit.notebook.jpa.IAuthorRepository;
+import com.summit.notebook.dao.ProfileJpaDao;
+import com.summit.notebook.domain.Profile;
 
 @Component
 public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
-    private IAuthorRepository authorRepository;
+    private ProfileJpaDao authorRepository;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails arg0, UsernamePasswordAuthenticationToken arg1) throws AuthenticationException {
@@ -37,7 +37,7 @@ public class AuthorAuthenticationProvider extends AbstractUserDetailsAuthenticat
         }
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         try {
-            Author user = authorRepository.findAuthorByUsernameAndPassword(username, password);
+            Profile user = authorRepository.findAuthorByUsernameAndPassword(username, password);
             if (user == null) {
                 throw new RuntimeException("User does not exist..");
             }

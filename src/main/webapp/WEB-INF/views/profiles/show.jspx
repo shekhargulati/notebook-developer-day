@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <page:show id="ps_com_summit_notebook_domain_Profile" object="${profile}" path="/profiles" z="user-managed" update="false" delete="false" create="false" list="false">
+    	<field:display field="username" id="s_com_summit_notebook_domain_Profile_username" label="Username" object="${profile}" z="user-managed"/>
+        <field:display field="email" id="s_com_summit_notebook_domain_Profile_email" object="${profile}" z="user-managed"/>
+        <field:display field="fullName" id="s_com_summit_notebook_domain_Profile_fullName" object="${profile}" z="user-managed"/>
+    </page:show>
+
+</div>
