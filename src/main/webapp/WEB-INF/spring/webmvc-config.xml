@@ -1,78 +1,142 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
-                
-    <!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->
-    <context:component-scan base-package="com.summit.notebook" use-default-filters="false">
-        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
-    </context:component-scan>
-    
-    <!-- Turns on support for mapping requests to Spring MVC @Controller methods
-         Also registers default Formatters and Validators for use across all @Controllers -->
-    <mvc:annotation-driven conversion-service="applicationConversionService"/>
-    
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources -->
-    <mvc:resources location="/, classpath:/META-INF/web-resources/" mapping="/resources/**"/>
 
-    <!-- Allows for mapping the DispatcherServlet to "/" by forwarding static resource 
-    requests to the container's default Servlet -->
-    <mvc:default-servlet-handler/>
 
-    <!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
-    <mvc:interceptors>
-        <bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor"/>
-        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" p:paramName="lang"/>
-        <bean class="com.summit.notebook.web.interceptors.NotebooksInitializerInterceptor"></bean>
-    </mvc:interceptors>
+	<context:component-scan base-package="com.summit.notebook.web,com.summit.notebook.social.config,com.summit.notebook.social.signin,com.summit.notebook.social.signup,com.summit.notebook.social.twitter">
+	</context:component-scan>
+	
 
-    <!-- Selects a static view for rendering without the need for an explicit controller -->
-    <mvc:view-controller path="/login"/>
-    <mvc:view-controller path="/" view-name="index"/>
-    <mvc:view-controller path="/uncaughtException"/>
-    <mvc:view-controller path="/resourceNotFound"/>
-    <mvc:view-controller path="/dataAccessFailure"/>
+	<!-- Turns on support for mapping requests to Spring MVC @Controller methods 
+		Also registers default Formatters and Validators for use across all @Controllers -->
+	<mvc:annotation-driven conversion-service="applicationConversionService" />
 
-    <!-- Resolves localized messages*.properties and application.properties files in the application to allow for internationalization. 
-    The messages*.properties files translate Roo generated messages which are part of the admin interface, the 
-    application.properties resource bundle localizes all application specific messages such as entity names and menu items. -->
-    <bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application" p:fallbackToSystemLocale="false"/>
 
-    <!-- Store preferred language configuration in a cookie -->
-    <bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver" id="localeResolver" p:cookieName="locale"/>
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources -->
+	<mvc:resources location="/, classpath:/META-INF/web-resources/"
+		mapping="/resources/**" />
 
-    <!-- Resolves localized <theme_name>.properties files in the classpath to allow for theme support -->
-    <bean class="org.springframework.ui.context.support.ResourceBundleThemeSource" id="themeSource"/>
+	<!-- Allows for mapping the DispatcherServlet to "/" by forwarding static 
+		resource requests to the container's default Servlet -->
+	<mvc:default-servlet-handler />
 
-    <!-- Store preferred theme configuration in a cookie -->
-    <bean class="org.springframework.web.servlet.theme.CookieThemeResolver" id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"/>
+	<!-- Register "global" interceptor beans to apply to all registered HandlerMappings -->
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.theme.ThemeChangeInterceptor" />
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"
+			p:paramName="lang" />
+		<bean
+			class="com.summit.notebook.web.interceptors.NotebooksInitializerInterceptor"></bean>
+	</mvc:interceptors>
 
-    <!-- This bean resolves specific types of exceptions to corresponding logical - view names for error views. 
-    The default behaviour of DispatcherServlet - is to propagate all exceptions to the servlet 
-    container: this will happen - here with all other types of exceptions. -->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver" p:defaultErrorView="uncaughtException">
-        <property name="exceptionMappings">
-            <props>
-                <prop key=".DataAccessException">dataAccessFailure</prop>
-                <prop key=".NoSuchRequestHandlingMethodException">resourceNotFound</prop>
-                <prop key=".TypeMismatchException">resourceNotFound</prop>
-                <prop key=".MissingServletRequestParameterException">resourceNotFound</prop>
-            </props>
-        </property>
-    </bean>
+	<!-- Selects a static view for rendering without the need for an explicit 
+		controller -->
+	<mvc:view-controller path="/" view-name="index" />
+	<mvc:view-controller path="/uncaughtException" />
+	<mvc:view-controller path="/resourceNotFound" />
+	<mvc:view-controller path="/dataAccessFailure" />
 
-    <!-- Enable this for integration of file upload functionality -->
-    <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
-<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
-    <property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
-  </bean>
-    <bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer" id="tilesConfigurer">
-    <property name="definitions">
-      <list>
-        <value>/WEB-INF/layouts/layouts.xml</value>
-        <!-- Scan views directory for Tiles configurations -->
-        <value>/WEB-INF/views/**/views.xml</value>
-      </list>
-    </property>
-  </bean>
-<bean class="com.summit.notebook.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+	<!-- Resolves localized messages*.properties and application.properties 
+		files in the application to allow for internationalization. The messages*.properties 
+		files translate Roo generated messages which are part of the admin interface, 
+		the application.properties resource bundle localizes all application specific 
+		messages such as entity names and menu items. -->
+	<bean
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		id="messageSource" p:basenames="WEB-INF/i18n/messages,WEB-INF/i18n/application"
+		p:fallbackToSystemLocale="false" />
+
+	<!-- Store preferred language configuration in a cookie -->
+	<bean class="org.springframework.web.servlet.i18n.CookieLocaleResolver"
+		id="localeResolver" p:cookieName="locale" />
+
+	<!-- Resolves localized <theme_name>.properties files in the classpath to 
+		allow for theme support -->
+	<bean
+		class="org.springframework.ui.context.support.ResourceBundleThemeSource"
+		id="themeSource" />
+
+	<!-- Store preferred theme configuration in a cookie -->
+	<bean class="org.springframework.web.servlet.theme.CookieThemeResolver"
+		id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard" />
+
+	<!-- This bean resolves specific types of exceptions to corresponding logical 
+		- view names for error views. The default behaviour of DispatcherServlet 
+		- is to propagate all exceptions to the servlet container: this will happen 
+		- here with all other types of exceptions. -->
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver"
+		p:defaultErrorView="uncaughtException">
+		<property name="exceptionMappings">
+			<props>
+				<prop key=".DataAccessException">dataAccessFailure</prop>
+				<prop key=".NoSuchRequestHandlingMethodException">resourceNotFound</prop>
+				<prop key=".TypeMismatchException">resourceNotFound</prop>
+				<prop key=".MissingServletRequestParameterException">resourceNotFound</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Enable this for integration of file upload functionality -->
+	<bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver" />
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		id="tilesViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer"
+		id="tilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layouts/layouts.xml</value>
+				<!-- Scan views directory for Tiles configurations -->
+				<value>/WEB-INF/views/**/views.xml</value>
+			</list>
+		</property>
+	</bean>
+	<bean class="com.summit.notebook.web.ApplicationConversionServiceFactoryBean"
+		id="applicationConversionService" />
+
+	<!-- <bean id="connectionFactoryLocator"
+		class="org.springframework.social.connect.support.ConnectionFactoryRegistry">
+		<property name="connectionFactories">
+			<list>
+				<bean
+					class="org.springframework.social.twitter.connect.TwitterConnectionFactory">
+					<constructor-arg value="YR571S2JiVBOFyJS5MEg" />
+					<constructor-arg value="Kb8hS0luftwCJX3qVoyiLUMfZDtK1EozFoUkjNLUMx4" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="usersConnectionRepository"
+		class="org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository">
+		<constructor-arg ref="dataSource" />
+		<constructor-arg ref="connectionFactoryLocator" />
+		<constructor-arg ref="textEncryptor" />
+	</bean>
+
+	<bean id="connectionRepository" factory-method="createConnectionRepository"
+		factory-bean="usersConnectionRepository" scope="request">
+		<constructor-arg value="#{request.userPrincipal.name}" />
+		<aop:scoped-proxy proxy-target-class="false" />
+	</bean>
+
+	<bean id="textEncryptor" class="org.springframework.security.crypto.encrypt.Encryptors"
+		factory-method="noOpText" />
+
+	<bean class="org.springframework.social.connect.web.ConnectController">
+		relies on by-type autowiring for the constructor-args
+	</bean> -->
 </beans>

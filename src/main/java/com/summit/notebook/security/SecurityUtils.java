@@ -1,12 +1,17 @@
 package com.summit.notebook.security;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public abstract class SecurityUtils {
 
     public static String getCurrentLoggedInUsername() {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+        Object principal = authentication.getPrincipal();
         String username = null;
         if (principal instanceof UserDetails) {
             username = ((UserDetails) principal).getUsername();

@@ -12,5 +12,5 @@
         </table:table>
     </page:list>
     
-    Create new Note ... <a href="/notebooks/${notebookId}/notes?form"><IMG alt="Create Note" src="/resources/images/note.jpg"/></a>
+    Create new Note ... <a href="/notebook/notebooks/${notebookId}/notes?form"><IMG alt="Create Note" src="/notebook/resources/images/note.jpg"/></a>
 </div>

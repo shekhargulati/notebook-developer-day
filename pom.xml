@@ -15,6 +15,8 @@
 		<slf4j.version>1.6.4</slf4j.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<spring-security.version>3.1.0.RELEASE</spring-security.version>
+		<org.springframework.social-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social-version>
+		<org.springframework.social.twitter-version>1.1.0.BUILD-SNAPSHOT</org.springframework.social.twitter-version>
 	</properties>
 	<repositories>
 		<repository>
@@ -370,7 +372,24 @@
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
 		</dependency>
-
+		
+		<!-- Spring Social Dependencies -->
+		
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-core</artifactId>
+	        <version>${org.springframework.social-version}</version>
+	    </dependency>
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-twitter</artifactId>
+	        <version>${org.springframework.social.twitter-version}</version>
+	    </dependency>
+		<dependency>
+		    <groupId>org.springframework.social</groupId>
+		    <artifactId>spring-social-web</artifactId>
+	        <version>${org.springframework.social-version}</version>
+	    </dependency>
 	</dependencies>
 	<build>
 		<plugins>
