@@ -2,6 +2,7 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+    
     <page:list id="pl_com_summit_notebook_domain_Note" items="${notes}" z="HFtaDraNHcc5djP+x5s+ijNKUBA=">
         <table:table data="${notes}" id="l_com_summit_notebook_domain_Note" path="/notebooks/${notebookId}/notes" z="XqdEGDmL6lYoOgzskWSyKv37hFw=">
             <table:column id="c_com_summit_notebook_domain_Note_title" property="title" z="waGQKi2qIs+3zg7KTdLW9FQbtEk="/>
@@ -11,5 +12,5 @@
         </table:table>
     </page:list>
     
-    Create new Note ... <a href="/notebook/notebooks/${notebookId}/notes?form"><IMG alt="Create Note" src="/notebook/resources/images/note.jpg"/></a>
+    Create new Note ... <a href="/notebooks/${notebookId}/notes?form"><IMG alt="Create Note" src="/notebook/resources/images/note.jpg"/></a>
 </div>

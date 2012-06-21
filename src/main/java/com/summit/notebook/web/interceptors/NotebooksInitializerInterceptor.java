@@ -25,7 +25,6 @@ public class NotebooksInitializerInterceptor extends HandlerInterceptorAdapter {
         if(username == null){
             return true;
         }
-        
         List<Notebook> notebooks = notebookService.findAllNotebookForUser(username);
         request.setAttribute("notebooks", notebooks);
         return true;
