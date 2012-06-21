@@ -7,6 +7,7 @@
 	<packaging>war</packaging>
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<name>notebook</name>
+<!--dummy-->
 	<properties>
 		<aspectj.version>1.6.12</aspectj.version>
 		<java.version>6</java.version>
