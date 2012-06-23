@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.social.twitter.api.Twitter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,14 +25,16 @@ import com.summit.notebook.domain.Note;
 import com.summit.notebook.domain.Notebook;
 import com.summit.notebook.service.NotebookService;
 
-@RequestMapping("/notebooks")
 @Controller
 public class NoteController {
 
     @Autowired
     NotebookService notebookService;
 
-    @RequestMapping(value = "/{notebookId}/notes", produces = "text/html", method = RequestMethod.PUT)
+    @Autowired
+    private Twitter twitter;
+
+    @RequestMapping(value = "/notebooks/{notebookId}/notes", produces = "text/html", method = RequestMethod.PUT)
     public String addNote(@PathVariable("notebookId") BigInteger notebookId,
             @Valid Note note, BindingResult bindingResult, Model uiModel,
             HttpServletRequest httpServletRequest) {
@@ -53,7 +56,7 @@ public class NoteController {
                         httpServletRequest);
     }
 
-    @RequestMapping(value = "/{notebookId}/notes", params = "form", produces = "text/html")
+    @RequestMapping(value = "/notebooks/{notebookId}/notes", params = "form", produces = "text/html")
     public String createForm(@PathVariable("notebookId") BigInteger notebookId,
             Model uiModel) {
         populateEditForm(uiModel, new Note());
@@ -61,7 +64,7 @@ public class NoteController {
         return "notes/create";
     }
 
-    @RequestMapping(value = "/{notebookId}/notes/{noteId}", produces = "text/html")
+    @RequestMapping(value = "/notebooks/{notebookId}/notes/{noteId}", produces = "text/html")
     public String show(@PathVariable("notebookId") BigInteger notebookId,
             @PathVariable("noteId") String noteId, Model uiModel) {
 
@@ -73,7 +76,13 @@ public class NoteController {
         return "notes/show";
     }
 
-    @RequestMapping(value = "/{notebookId}/notes", produces = "text/html")
+    @RequestMapping(value = "/twitter/tweet", produces = "text/html")
+    public String tweet(@RequestParam("tweetUrl") String tweetUrl) {
+        twitter.timelineOperations().updateStatus("Created a new note " + tweetUrl);
+        return "index";
+    }
+
+    @RequestMapping(value = "/notebooks/{notebookId}/notes", produces = "text/html")
     public String list(@PathVariable("notebookId") BigInteger notebookId,
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size,
@@ -97,7 +106,7 @@ public class NoteController {
         return "notes/list";
     }
 
-    @RequestMapping(value = "/{notebookId}/notes/update", method = RequestMethod.PUT, produces = "text/html")
+    @RequestMapping(value = "/notebooks/{notebookId}/notes/update", method = RequestMethod.PUT, produces = "text/html")
     public String update(@PathVariable("notebookId") BigInteger notebookId,
             @Valid Note note, BindingResult bindingResult, Model uiModel,
             HttpServletRequest httpServletRequest) {
@@ -116,14 +125,14 @@ public class NoteController {
                         httpServletRequest);
     }
 
-    @RequestMapping(value = "/{notebookId}/notes/{id}", params = "form", produces = "text/html")
+    @RequestMapping(value = "/notebooks/{notebookId}/notes/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("notebookId") BigInteger notebookId, @PathVariable("id") String noteId, Model uiModel) {
         populateEditForm(uiModel, notebookService.findNote(notebookId, noteId));
         uiModel.addAttribute("notebookId", notebookId);
         return "notes/update";
     }
 
-    @RequestMapping(value = "/{notebookId}/notes/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    @RequestMapping(value = "/notebooks/{notebookId}/notes/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("notebookId") BigInteger notebookId, @PathVariable("id") String noteId,
             @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         uiModel.asMap().clear();
@@ -158,66 +167,4 @@ public class NoteController {
         return pathSegment;
     }
 
-    /*
-     * @RequestMapping(value = "/{id}", headers = "Accept=application/json")
-     * 
-     * @ResponseBody public ResponseEntity<String> showJson(@PathVariable("id")
-     * BigInteger id) { Note note = noteService.findNote(id); HttpHeaders
-     * headers = new HttpHeaders(); headers.add("Content-Type",
-     * "application/json; charset=utf-8"); if (note == null) { return new
-     * ResponseEntity<String>(headers, HttpStatus.NOT_FOUND); } return new
-     * ResponseEntity<String>(note.toJson(), headers, HttpStatus.OK); }
-     * 
-     * @RequestMapping(headers = "Accept=application/json")
-     * 
-     * @ResponseBody public ResponseEntity<String> listJson() { HttpHeaders
-     * headers = new HttpHeaders(); headers.add("Content-Type",
-     * "application/json; charset=utf-8"); List<Note> result =
-     * noteService.findAllNotes(); return new
-     * ResponseEntity<String>(Note.toJsonArray(result), headers, HttpStatus.OK);
-     * }
-     * 
-     * @RequestMapping(method = RequestMethod.POST, headers =
-     * "Accept=application/json") public ResponseEntity<String>
-     * createFromJson(@RequestBody String json) { Note note =
-     * Note.fromJsonToNote(json); noteService.saveNote(note); HttpHeaders
-     * headers = new HttpHeaders(); headers.add("Content-Type",
-     * "application/json"); return new ResponseEntity<String>(headers,
-     * HttpStatus.CREATED); }
-     * 
-     * @RequestMapping(value = "/jsonArray", method = RequestMethod.POST,
-     * headers = "Accept=application/json") public ResponseEntity<String>
-     * createFromJsonArray(@RequestBody String json) { for (Note note :
-     * Note.fromJsonArrayToNotes(json)) { noteService.saveNote(note); }
-     * HttpHeaders headers = new HttpHeaders(); headers.add("Content-Type",
-     * "application/json"); return new ResponseEntity<String>(headers,
-     * HttpStatus.CREATED); }
-     * 
-     * @RequestMapping(method = RequestMethod.PUT, headers =
-     * "Accept=application/json") public ResponseEntity<String>
-     * updateFromJson(@RequestBody String json) { HttpHeaders headers = new
-     * HttpHeaders(); headers.add("Content-Type", "application/json"); Note note
-     * = Note.fromJsonToNote(json); if (noteService.updateNote(note) == null) {
-     * return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND); }
-     * return new ResponseEntity<String>(headers, HttpStatus.OK); }
-     * 
-     * @RequestMapping(value = "/jsonArray", method = RequestMethod.PUT, headers
-     * = "Accept=application/json") public ResponseEntity<String>
-     * updateFromJsonArray(@RequestBody String json) { HttpHeaders headers = new
-     * HttpHeaders(); headers.add("Content-Type", "application/json"); for (Note
-     * note : Note.fromJsonArrayToNotes(json)) { if
-     * (noteService.updateNote(note) == null) { return new
-     * ResponseEntity<String>(headers, HttpStatus.NOT_FOUND); } } return new
-     * ResponseEntity<String>(headers, HttpStatus.OK); }
-     * 
-     * @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers =
-     * "Accept=application/json") public ResponseEntity<String> deleteFromJson(
-     * 
-     * @PathVariable("id") BigInteger id) { Note note =
-     * noteService.findNote(id); HttpHeaders headers = new HttpHeaders();
-     * headers.add("Content-Type", "application/json"); if (note == null) {
-     * return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND); }
-     * noteService.deleteNote(note); return new ResponseEntity<String>(headers,
-     * HttpStatus.OK); }
-     */
 }
