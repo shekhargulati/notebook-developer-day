@@ -90,7 +90,7 @@ public class NotebookServiceImpl implements NotebookService {
     public void updateNote(BigInteger notebookId, Note note) {
         mongoTemplate.updateFirst(
                 Query.query(Criteria.where("_id").is(new ObjectId(notebookId.toString(16)))
-                        .and("notes._id").is(note.getId())),
+                        .and("notes.id").is(note.getId())),
                 new Update().set("notes.$.title", note.getTitle()).set(
                         "notes.$.text", note.getText()).set("notes.$.tags", note.getTags()), Notebook.class);
     }
@@ -106,7 +106,7 @@ public class NotebookServiceImpl implements NotebookService {
     public void removeNoteFromNotebook(BigInteger notebookId, String noteId) {
         Query query = Query.query(Criteria.where("id").is(notebookId));
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("_id", noteId);
+        map.put("id", noteId);
         Update update = new Update().pull("notes", map);
         mongoTemplate.updateFirst(query, update, Notebook.class);
     }
