@@ -68,7 +68,7 @@ public class NotebookServiceImpl implements NotebookService {
     }
 
     public List<Note> findAllNotes(BigInteger notebookId) {
-        return notebookRepository.findOne(notebookId).getNotes();
+        return notebookRepository.findOne(notebookId).getNotesCollection();
     }
 
     public int notesCount(BigInteger notebookId) {
@@ -78,7 +78,7 @@ public class NotebookServiceImpl implements NotebookService {
     public Note findNote(BigInteger notebookId, String noteId) {
         Notebook notebook = findNotebook(notebookId);
         Note requestedNote = null;
-        for (Note note : notebook.getNotes()) {
+        for (Note note : notebook.getNotesCollection()) {
             if (StringUtils.equals(noteId, note.getId())) {
                 requestedNote = note;
                 break;
@@ -100,7 +100,7 @@ public class NotebookServiceImpl implements NotebookService {
         Query query = Query.query(Criteria.where("id").is(notebookId));
         query.fields().slice("notes", start, end);
         Notebook notebook = mongoTemplate.findOne(query, Notebook.class);
-        return notebook.getNotes();
+        return notebook.getNotesCollection();
     }
 
     public void removeNoteFromNotebook(BigInteger notebookId, String noteId) {

@@ -16,6 +16,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Persistent;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -47,7 +48,15 @@ public class Notebook {
     @NotNull
     private String[] tags;
 
-    private List<Note> notes = new ArrayList<Note>();
+    @Transient
+    private List<Note> notesCollection = new ArrayList<Note>();
+
+    private Note[] notes = null;
+
+    public Note[] getNotes1() {
+        notes = notesCollection.toArray(new Note[0]);
+        return notes;
+    }
 
     public BigInteger getId() {
         return this.id;
@@ -97,12 +106,12 @@ public class Notebook {
         this.tags = tags;
     }
 
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
+    public void setNotesCollection(List<Note> notes) {
+        this.notesCollection = notes;
     }
 
-    public List<Note> getNotes() {
-        return notes;
+    public List<Note> getNotesCollection() {
+        return notesCollection;
     }
 
     public String toJson() {

@@ -44,7 +44,7 @@ public class NoteController {
         uiModel.asMap().clear();
         Notebook notebook = notebookService.findNotebook(notebookId);
         note.setId(UUID.randomUUID().toString());
-        notebook.getNotes().add(note);
+        notebook.getNotesCollection().add(note);
         notebookService.updateNotebook(notebook);
         return "redirect:/notebooks/"
                 + notebookId
