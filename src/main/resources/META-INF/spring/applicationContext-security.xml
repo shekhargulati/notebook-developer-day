@@ -16,7 +16,7 @@
 		<intercept-url pattern="/resources/**" access="permitAll" />
 		<intercept-url pattern="/signin/**" access="permitAll" />
 		<intercept-url pattern="/signup/**" access="permitAll" />
-
+		<intercept-url pattern="/notebooks/*/notes/*" access="permitAll" />
 		<intercept-url pattern="/notebooks/**" access="isAuthenticated()" />
 		<intercept-url pattern="/notes/**" access="isAuthenticated()" />
 		<intercept-url pattern="/**" access="isAuthenticated()" />
