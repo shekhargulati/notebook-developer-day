@@ -16,6 +16,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Persistent;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import flexjson.JSONDeserializer;
@@ -28,6 +29,7 @@ public class Notebook {
     private BigInteger id;
 
     @NotNull
+    @Indexed
     private String name;
 
     @NotNull
