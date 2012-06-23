@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.summit.notebook.domain.Profile;
-import com.summit.notebook.social.account.UsernameAlreadyInUseException;
+import com.summit.notebook.social.signup.UsernameAlreadyInUseException;
 
 @Repository
 @Transactional

@@ -21,7 +21,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.summit.notebook.dao.ProfileJpaDao;
 import com.summit.notebook.domain.Profile;
-import com.summit.notebook.social.account.UsernameAlreadyInUseException;
 import com.summit.notebook.social.message.Message;
 import com.summit.notebook.social.message.MessageType;
 import com.summit.notebook.social.signin.SignInUtils;
