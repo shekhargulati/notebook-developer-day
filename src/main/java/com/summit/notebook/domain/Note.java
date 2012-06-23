@@ -13,15 +13,12 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Persistent;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 
-@Persistent
 public class Note {
 
     @NotNull
@@ -41,7 +38,6 @@ public class Note {
     @Indexed
     private String[] tags;
 
-    @Id
     private String id;
 
     public String getId() {
