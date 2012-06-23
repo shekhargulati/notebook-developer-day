@@ -1,16 +1,17 @@
 package com.summit.notebook.web;
 
-import com.summit.notebook.domain.Note;
-import com.summit.notebook.domain.Notebook;
-import com.summit.notebook.service.NoteService;
-import com.summit.notebook.service.NotebookService;
 import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 import org.springframework.roo.addon.web.mvc.controller.converter.RooConversionService;
+
+import com.summit.notebook.domain.Note;
+import com.summit.notebook.domain.Notebook;
+import com.summit.notebook.service.NotebookService;
 
 @Configurable
 /**
@@ -26,9 +27,6 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     }
 
     @Autowired
-    NoteService noteService;
-
-    @Autowired
     NotebookService notebookService;
 
     public Converter<Note, String> getNoteToStringConverter() {
@@ -40,13 +38,6 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-    public Converter<BigInteger, Note> getIdToNoteConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.math.BigInteger, com.summit.notebook.domain.Note>() {
-            public com.summit.notebook.domain.Note convert(java.math.BigInteger id) {
-                return noteService.findNote(id);
-            }
-        };
-    }
 
     public Converter<String, Note> getStringToNoteConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.summit.notebook.domain.Note>() {
@@ -83,7 +74,6 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
     public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getNoteToStringConverter());
-        registry.addConverter(getIdToNoteConverter());
         registry.addConverter(getStringToNoteConverter());
         registry.addConverter(getNotebookToStringConverter());
         registry.addConverter(getIdToNotebookConverter());
